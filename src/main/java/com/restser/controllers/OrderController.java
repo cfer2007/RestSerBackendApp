@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restser.model.Orders;
-import com.restser.model.OrderDetail;
-import com.restser.repository.OrderLogRepository;
 import com.restser.repository.OrderRepository;
 
 @RestController
@@ -23,10 +21,7 @@ public class OrderController {
 	
 	@Autowired
 	private OrderRepository repo;
-	
-	@Autowired
-	private OrderLogRepository repoLog;
-	
+		
 	@GetMapping
 	public List<Orders> getAll(){
 		return repo.findAll();

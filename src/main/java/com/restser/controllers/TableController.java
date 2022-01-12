@@ -28,6 +28,7 @@ public class TableController {
 	}
 	@GetMapping("/{id}")
 	public Tables getTable(@PathVariable("id") Long id) {
+		System.out.println("ïd: "+id);
 		return repo.findByIdTable(id);
 	}
 	@PostMapping

@@ -47,12 +47,14 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     private void verifyToken(HttpServletRequest request) {
+    	System.out.println("verifytoken");
         String session = null;
         FirebaseToken decodedToken = null;
         Credentials.CredentialType type = null;
         boolean strictServerSessionEnabled = securityProps.getFirebaseProps().isEnableStrictServerSession();
         Cookie sessionCookie = cookieUtils.getCookie("session");
         String token = securityService.getBearerToken(request);
+        System.out.println(token);
         //logger.info(token);
         try {
             if (sessionCookie != null) {
