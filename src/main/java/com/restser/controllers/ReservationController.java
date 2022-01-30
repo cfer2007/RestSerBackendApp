@@ -7,16 +7,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restser.TransactionControl.ConfirmReservation;
+import com.restser.TransactionControl.StatusControl;
 import com.restser.dto.AccountReservationDTO;
-//import com.restser.dto.StatusReservationDTO;
 import com.restser.model.Reservation;
-//import com.restser.model.ReservationDetail;
-//import com.restser.repository.ReservationLogRepository;
+import com.restser.model.ReservationDetail;
+import com.restser.repository.ReservationDetailRepository;
 import com.restser.repository.ReservationRepository;
 
 @RestController
@@ -25,8 +26,10 @@ public class ReservationController {
 
 	@Autowired
 	private ReservationRepository repo;
-	/*@Autowired
-	private ReservationLogRepository repoLog;*/
+	@Autowired
+	private ConfirmReservation reservationControl;
+	@Autowired
+	private StatusControl statusControl;
 	
 	@GetMapping
 	public List<Reservation> getList(){
@@ -45,13 +48,13 @@ public class ReservationController {
 		System.out.println("uid: "+rest.getUser().getUid());
 		Long id = repo.save(rest).getIdReservation();
 		rest.setIdReservation(id);
-		//setLog(rest);
+		statusControl.setReservationLog(rest);
 		return id;
 	}
-	/*@PutMapping
-	public void updateStatus(@RequestBody StatusReservationDTO rest) {
-		repo.save(rest);
-	}*/
+	@PutMapping
+	public void confirmReservation(@RequestBody Reservation rest) {
+		reservationControl.confirmReservation(rest.getStatus(), rest);
+	}	
 	
 	
 	@DeleteMapping(value="/{id}")
@@ -59,11 +62,5 @@ public class ReservationController {
 		repo.deleteById(id);
 	}
 	
-	/*private void setLog(Reservation res) {
-		ReservationDetail det = new ReservationDetail();
-		det.setDate(res.getStart());
-		det.setStatus(res.getStatus());
-		det.setReservation(res);
-		repoLog.save(det);
-	}*/
+	
 }

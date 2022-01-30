@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity(name="reservation_detail")
 public class ReservationDetail {
 
@@ -21,14 +23,14 @@ public class ReservationDetail {
 	private String status;
 	
 	@Column
+	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
 	private Date date;
 	
 	@Column(length=100)
 	private String description;
 	
-	@ManyToOne
-    @JoinColumn(name = "idReservation", nullable = true)
-	private Reservation reservation;
+	@Column
+	private Long idReservation;
 
 	public long getIdReservationDetail() {
 		return idReservationDetail;
@@ -62,11 +64,11 @@ public class ReservationDetail {
 		this.description = description;
 	}
 
-	public Reservation getReservation() {
-		return reservation;
+	public Long getIdReservation() {
+		return idReservation;
 	}
 
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
-	}	
+	public void setIdReservation(Long idReservation) {
+		this.idReservation = idReservation;
+	}
 }

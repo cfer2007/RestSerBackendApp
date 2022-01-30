@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restser.TransactionControl.StatusControl;
+import com.restser.model.Account;
 import com.restser.model.Orders;
+import com.restser.repository.AccountRepository;
 import com.restser.repository.OrderRepository;
 
 @RestController
@@ -21,11 +24,16 @@ public class OrderController {
 	
 	@Autowired
 	private OrderRepository repo;
+	@Autowired
+	private AccountRepository accountRepo;
+	@Autowired
+	private StatusControl statusControl;
 		
 	@GetMapping
 	public List<Orders> getAll(){
 		return repo.findAll();
 	}
+	
 	@GetMapping("/user/{uid}")
 	public List<Orders> getOrdersByUser(@PathVariable("uid") String uid){
 		return repo.getOrdersByUser(uid);
@@ -39,8 +47,10 @@ public class OrderController {
 	@PostMapping
 	public  Long setOrder(@RequestBody Orders rest) {
 		Long id = repo.save(rest).getIdOrder();
-		rest.setIdOrder(id);
-		setLog(rest);
+		Account account = accountRepo.findByIdAccount(rest.getAccount().getIdAccount());
+		account.setSubtotal(account.getSubtotal()+rest.getTotal_price());
+		accountRepo.save(account);	
+		statusControl.setOrderLog(rest);
 		return id;
 	}
 	@PutMapping
@@ -52,11 +62,5 @@ public class OrderController {
 		repo.deleteById(id);
 	}
 	
-	private void setLog(Orders order) {
-		/*OrdersLog log = new OrdersLog();
-		log.setDate(order.getDate());
-		log.setStatus(order.getStatus());
-		log.setOrder(order);
-		repoLog.save(log);*/
-	}
+	
 }

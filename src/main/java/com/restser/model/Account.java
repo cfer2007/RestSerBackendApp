@@ -3,16 +3,23 @@ package com.restser.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity(name = "account")
@@ -28,12 +35,21 @@ public class Account{
     @JoinColumn(name = "uid", nullable = true)
 	private User user;
 	
-	@ManyToOne
-    @JoinColumn(name = "idReservation", nullable = true)	
-	private Reservation reservation;
+	@Column
+	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
+	private Date date;
 	
 	@Column
-	private Date date;
+	private double subtotal;
+	
+	@OneToMany(mappedBy="account", fetch = FetchType.EAGER)
+	@JsonManagedReference
+    private List<Orders> listOrder;
+	
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name="idReservation")
+	private Reservation reservation;
 	
 	public Date getDate() {
 		return date;
@@ -66,4 +82,21 @@ public class Account{
 	public void setReservation(Reservation reservation) {
 		this.reservation = reservation;
 	}
+
+	public List<Orders> getListOrder() {
+		return listOrder;
+	}
+
+	public void setListOrder(List<Orders> listOrder) {
+		this.listOrder = listOrder;
+	}
+
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+	}
+	
 }

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restser.model.Account;
 import com.restser.model.Reservation;
 import com.restser.model.User;
-import com.restser.repository.AccountRespository;
+import com.restser.repository.AccountRepository;
 
 @RestController
 @RequestMapping("/account")
 public class AccountController {
 
 	@Autowired
-	private AccountRespository repo;
+	private AccountRepository repo;
 	
 	@GetMapping
 	public List<Account> getList(){

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -26,6 +29,7 @@ public class Orders implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idOrder;
 	@Column
+	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
 	private Date date;
 	
 	@Column(length=100)
@@ -42,68 +46,87 @@ public class Orders implements Serializable{
 	
 	@Column(length=4)
 	private int total_units;
-	
+		
 	@ManyToOne
-    @JoinColumn(name = "idAccount", nullable = true)
+	@JsonBackReference
+	@JoinColumn(name="id_account")
 	private Account account;
 	
-	@OneToMany(mappedBy="order")
+	@OneToMany(mappedBy="order", fetch = FetchType.EAGER)
 	@JsonManagedReference
-    private List<OrderDish> listOrderDetail;
+    private List<OrderDish> listOrderDish;
 
-	public List<OrderDish> getListOrderDetail() {
-		return listOrderDetail;
-	}
-	public void setListOrderDetail(List<OrderDish> listOrderDetail) {
-		this.listOrderDetail = listOrderDetail;
-	}
 	public Long getIdOrder() {
 		return idOrder;
 	}
+
 	public void setIdOrder(Long idOrder) {
 		this.idOrder = idOrder;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getDescription() {
+
+	public String getComment() {
 		return comment;
 	}
-	public void setDescription(String description) {
-		this.comment = description;
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Account getAccount() {
-		return account;
-	}
-	public void setAccount(Account account) {
-		this.account = account;
-	}
+
 	public String getCurrency() {
 		return currency;
 	}
+
 	public void setCurrency(String currency) {
 		this.currency = currency;
-	}	
+	}
+
 	public double getTotal_price() {
 		return total_price;
 	}
+
 	public void setTotal_price(double total_price) {
 		this.total_price = total_price;
 	}
+
 	public int getTotal_units() {
 		return total_units;
 	}
+
 	public void setTotal_units(int total_units) {
 		this.total_units = total_units;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public List<OrderDish> getListOrderDish() {
+		return listOrderDish;
+	}
+
+	public void setListOrderDish(List<OrderDish> listOrderDish) {
+		this.listOrderDish = listOrderDish;
+	}
+
 	
 }

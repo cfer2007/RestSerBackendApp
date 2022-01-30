@@ -11,7 +11,7 @@ import com.restser.model.Account;
 import com.restser.model.Reservation;
 import com.restser.model.User;
 
-public interface AccountRespository extends JpaRepository<Account, Long>{
+public interface AccountRepository extends JpaRepository<Account, Long>{
 
 	
 	List<Account> findByReservation(Reservation reservation);

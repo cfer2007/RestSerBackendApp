@@ -13,29 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restser.model.OrderDish;
-import com.restser.repository.OrderDetailRepository;
+import com.restser.repository.OrderDishRepository;
 
 @RestController
 @RequestMapping("/order_detail")
-public class OrderDetailController {
+public class OrderDishController {
 
 	@Autowired
-	private OrderDetailRepository repo;
+	private OrderDishRepository repo;
 	
 	@GetMapping
 	public List<OrderDish> getList(){
 		return repo.findAll();
 	}	
 	@PostMapping
-	public  void setOrderDetail(@RequestBody List<OrderDish> rest) {
+	public  void setOrderDish(@RequestBody List<OrderDish> rest) {
 		repo.saveAll(rest);
 	}
 	@PutMapping
-	public void updateOrderDetail(@RequestBody OrderDish rest) {
+	public void updateOrderDish(@RequestBody OrderDish rest) {
 		repo.save(rest);
 	}
 	@DeleteMapping(value="/{id}")
-	public void deleteOrderDetail(@PathVariable("id") Long id) {
+	public void deleteOrderDish(@PathVariable("id") Long id) {
 		repo.deleteById(id);
 	}
 }

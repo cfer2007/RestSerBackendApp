@@ -41,7 +41,7 @@ public class ContactController {
 	}*/
 	@PostMapping("/list")
 	public void setContactList(@RequestBody List<Contact> list) {
-		/*list.forEach(e -> {
+		list.forEach(e -> {
 				try {
 					repo.insertContact(
 					e.getDate(),
@@ -49,7 +49,7 @@ public class ContactController {
 					e.getFriend().getUid());
 				}
 				catch(Exception ex){System.out.println(ex.getMessage());}
-			});		*/
+			});		
 	}
 	
 	@PutMapping

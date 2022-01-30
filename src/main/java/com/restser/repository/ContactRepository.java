@@ -1,5 +1,6 @@
 package com.restser.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,7 +30,7 @@ public interface ContactRepository extends JpaRepository<Contact, Long>{
 	@Modifying()
     @Query(value = "insert into contact(date,uid,id_friend) values(:date,:uid,:idFriend)", nativeQuery = true)    
 	@Transactional
-	void insertContact(@Param("date") String date, @Param("uid") String uid,@Param("idFriend") String idFriend);
+	void insertContact(@Param("date") Date date, @Param("uid") String uid,@Param("idFriend") String idFriend);
 	
 	@Modifying()
     @Query(value = "delete from contact where uid=:uid and id_friend=:idFriend", nativeQuery = true)    

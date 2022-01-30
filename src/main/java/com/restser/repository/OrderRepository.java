@@ -10,6 +10,8 @@ import com.restser.model.Orders;
 
 public interface OrderRepository extends JpaRepository<Orders, Long>{
 	
+	Orders findByIdOrder(Long id);
+	
 	@Query(value="select o.* \r\n"
 			+ "from orders o,\r\n"
 			+ "account a,\r\n"
@@ -31,4 +33,16 @@ public interface OrderRepository extends JpaRepository<Orders, Long>{
 			+ "and t. id_branch = b.id_branch\r\n"
 			+ "and b.id_restaurant =:idRestaurant", nativeQuery = true)
 	List<Orders> getOrdersByRestaurant(@Param("idRestaurant") Long idRestaurant);
+	
+	@Query(value="select od.* \r\n"
+			+ "from order_dish od,\r\n"
+			+ "orders o,\r\n"
+			+ "account a,\r\n"
+			+ "reservation r\r\n"
+			+ "where od.id_order = o.id_order\r\n"
+			+ "and o.id_account = a.id_account\r\n"
+			+ "and a.id_reservation = r.id_reservation\r\n"
+			+ "and r.id_reservation =: idReservation", nativeQuery = true)
+	List<Orders> getOrdersByReservation(@Param("idReservation") String idReservation);
+	
 }

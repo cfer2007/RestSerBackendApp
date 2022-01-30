@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "table_detail")
 public class TableDetail {
@@ -20,6 +22,7 @@ public class TableDetail {
 	private String status;
 	
 	@Column
+	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
 	private Date date;
 
 	public Long getIdTableDetail() {

@@ -1,15 +1,21 @@
 package com.restser.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Table(name="reservation")
 @Entity(name="reservation")
@@ -23,6 +29,7 @@ public class Reservation {
 	private String status;
 	
 	@Column
+	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
 	private Date start;
 	
 	@Column
@@ -36,7 +43,9 @@ public class Reservation {
     @JoinColumn(name = "idTable", nullable = true)
     private Tables table;
 
-
+	@OneToMany(mappedBy="reservation", fetch = FetchType.EAGER)
+	@JsonManagedReference
+    private List<Account> listAccount;
 
 	public long getIdReservation() {
 		return idReservation;
@@ -85,4 +94,13 @@ public class Reservation {
 	public void setFinish(Date finish) {
 		this.finish = finish;
 	}
+
+	public List<Account> getListAccount() {
+		return listAccount;
+	}
+
+	public void setListAccount(List<Account> listAccount) {
+		this.listAccount = listAccount;
+	}
+	
 }
