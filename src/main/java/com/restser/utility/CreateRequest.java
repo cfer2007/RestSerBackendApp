@@ -7,17 +7,47 @@ import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import com.restser.dto.NotificationDTO;
+
 public class CreateRequest {
 	
-	public HttpEntity<String> createPostRequestSendNotification(String fcmServerkey, String fcmToken, String title, String message) {
+	/*public HttpEntity<String> createPostRequestSendNotification(String fcmServerkey, String fcmToken, String title, String message) {
 
     	JSONObject notification = new JSONObject();
         notification.put("body", message);
         notification.put("title", title);
+        
+        JSONObject data = new JSONObject();
+        data.put("id_reservation","3");
     	
         JSONObject requestBodyJsonObject = new JSONObject();
         requestBodyJsonObject.put("to", fcmToken);
         requestBodyJsonObject.put("notification", notification);
+        requestBodyJsonObject.put("data", data);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.set("Authorization", fcmServerkey);
+
+        return new HttpEntity<String>(requestBodyJsonObject.toString(), httpHeaders);
+    }*/
+	
+	public HttpEntity<String> createPostRequestSendNotification(NotificationDTO notificationDto,String fcmServerkey) {
+
+    	JSONObject notification = new JSONObject();
+        notification.put("body", notificationDto.getMessage());
+        notification.put("title", notificationDto.getTitle());
+        
+        JSONObject data = new JSONObject();
+        notificationDto.getData().forEach((key, value) -> {
+        	data.put(key,value);
+        });
+        
+    	
+        JSONObject requestBodyJsonObject = new JSONObject();
+        requestBodyJsonObject.put("to", notificationDto.getFcmToken());
+        requestBodyJsonObject.put("notification", notification);
+        requestBodyJsonObject.put("data", data);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -71,3 +101,4 @@ public class CreateRequest {
 
     }
 }
+;

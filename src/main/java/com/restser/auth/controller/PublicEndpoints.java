@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.restser.dto.NotificationDTO;
 import com.restser.service.NotificationService;
 
 
@@ -22,7 +24,12 @@ public class PublicEndpoints {
 
     @PostMapping("/notification")
     public void sendMessage() {
-    	notification.sendNotification("dTB9NafVQAWHVKKUKzx5ou:APA91bHsrgI_nJ71u2_IqlDcsbkdVEfR8kQcIPuqtLZEECt2yIII5PDGdLCMqyj-NYelhw-CDrxR8bJgCc16dBZvrhRMyfXUS6lzW7yKfuHh2aN3FnJSvnu1FhGSR_Vc5Fnd49k10jYX", 
-    			"title", "message");
+    	NotificationDTO notificationDto = new NotificationDTO();
+    	notificationDto.setFcmToken("dEYUrNulRM2aCU9LdP7Q1D:APA91bGQDpyynuDXwnSs_zDEEmoIlcfOKIZYVQv5WSerOaUIwQasWffCnCBCv-aZCI8rTXGbZExkSOafyO64Dnd1ZJcvM-2hVeFN2Voc7vkYjqXxKHWwqMO_toC3JExAb-UsayjeOKcP");
+    	notificationDto.setTitle("title");
+    	notificationDto.setMessage("message");
+    	
+    	
+    	notification.sendNotification(notificationDto);
     }
 }

@@ -16,8 +16,6 @@ import com.restser.TransactionControl.ConfirmReservation;
 import com.restser.TransactionControl.StatusControl;
 import com.restser.dto.AccountReservationDTO;
 import com.restser.model.Reservation;
-import com.restser.model.ReservationDetail;
-import com.restser.repository.ReservationDetailRepository;
 import com.restser.repository.ReservationRepository;
 
 @RestController
