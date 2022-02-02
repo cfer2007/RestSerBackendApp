@@ -21,8 +21,15 @@ public class NotificationController {
 	
 	@PostMapping("/order_setted")
     public void sendMessage(@RequestBody NotificationDTO notification) {
-		notification.setFcmToken(userRepo.findByUid(notification.getUid()).getFcmToken());
-		notificationService.sendNotification(notification);
+		try {
+			System.out.println(userRepo.findByUid(notification.getUid()).getEmail() );
+			System.out.println(notification.getData());
+			notification.setFcmToken(userRepo.findByUid(notification.getUid()).getFcmToken());
+			notificationService.sendNotification(notification);
+		}
+		catch(Exception error) {
+			System.out.println(error);
+		}
     }
 	
 }
