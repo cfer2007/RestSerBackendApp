@@ -1,8 +1,5 @@
 package com.restser.model;
 
-
-
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -36,8 +32,11 @@ public class Account{
 	private User user;
 	
 	@Column
-	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
-	private Date date;
+	//@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
+	private String date;
+	
+	@Column(length=2)
+	private String currency;
 	
 	@Column
 	private double subtotal;
@@ -51,11 +50,11 @@ public class Account{
 	@JoinColumn(name="idReservation")
 	private Reservation reservation;
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -97,6 +96,14 @@ public class Account{
 
 	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 	
 }

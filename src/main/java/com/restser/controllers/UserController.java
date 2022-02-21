@@ -26,7 +26,6 @@ public class UserController {
 	}
 	@PostMapping
 	public void setGoogleUser(@RequestBody User user) {
-		System.out.println("ädfas");
 		repo.save(user);
 	}
 }

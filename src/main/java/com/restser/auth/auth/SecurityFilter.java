@@ -53,7 +53,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         boolean strictServerSessionEnabled = securityProps.getFirebaseProps().isEnableStrictServerSession();
         Cookie sessionCookie = cookieUtils.getCookie("session");
         String token = securityService.getBearerToken(request);
-        //System.out.println(token);
+        System.out.println(token);
         //logger.info(token);
         try {
             if (sessionCookie != null) {

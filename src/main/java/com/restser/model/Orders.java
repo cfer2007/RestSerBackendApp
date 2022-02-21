@@ -1,7 +1,6 @@
 package com.restser.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,8 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-//import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity(name="orders")
@@ -29,8 +26,8 @@ public class Orders implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idOrder;
 	@Column
-	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
-	private Date date;
+	//@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
+	private String date;
 	
 	@Column(length=100)
 	private String comment;
@@ -46,7 +43,15 @@ public class Orders implements Serializable{
 	
 	@Column(length=4)
 	private int total_units;
-		
+	
+	@Column
+	private Long idOrderReservation;
+	
+	/*@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name="idOrderOeservation")
+	private OrderReservation orderReservation;	*/
+
 	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name="id_account")
@@ -64,11 +69,11 @@ public class Orders implements Serializable{
 		this.idOrder = idOrder;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -128,5 +133,22 @@ public class Orders implements Serializable{
 		this.listOrderDish = listOrderDish;
 	}
 
+	public Long getIdOrderReservation() {
+		return idOrderReservation;
+	}
+
+	public void setIdOrderReservation(Long idOrderReservation) {
+		this.idOrderReservation = idOrderReservation;
+	}
+	
+
+	/*public OrderReservation getOrderReservation() {
+		return orderReservation;
+	}
+
+	public void setOrderReservation(OrderReservation orderReservation) {
+		this.orderReservation = orderReservation;
+	}*/
+	
 	
 }

@@ -24,8 +24,7 @@ public class authEndpoint {
 	
 	@PostMapping("/signInWithEmailAndPassword")
     public FirebaseSignInSignUpResponseBean signInWithEmailAndPassword(@RequestBody LoginRequest user) {
-		System.out.println("ädsd");
-        FirebaseSignInSignUpResponseBean firebaseSignInSignUpResponseBean = userAuthenticationServiceImpl.signInWithEmailAndPassword(user.getEmail(),user.getPassword());
+		FirebaseSignInSignUpResponseBean firebaseSignInSignUpResponseBean = userAuthenticationServiceImpl.signInWithEmailAndPassword(user.getEmail(),user.getPassword());
         return firebaseSignInSignUpResponseBean;
 
     }

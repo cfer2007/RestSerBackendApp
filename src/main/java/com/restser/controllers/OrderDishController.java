@@ -1,5 +1,4 @@
 package com.restser.controllers;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.restser.dto.OrderDishDTO;
 import com.restser.model.OrderDish;
 import com.restser.repository.OrderDishRepository;
 
 @RestController
-@RequestMapping("/order_detail")
+@RequestMapping("/order_dish")
 public class OrderDishController {
 
 	@Autowired
@@ -25,7 +24,12 @@ public class OrderDishController {
 	@GetMapping
 	public List<OrderDish> getList(){
 		return repo.findAll();
+	}
+	@GetMapping("/list/{idReservation}")
+	public List<OrderDishDTO> getOrderDishListByIdReservation(@PathVariable("idReservation") Long idReservation){
+		return repo.getOrderDishListByIdReservation(idReservation);
 	}	
+	
 	@PostMapping
 	public  void setOrderDish(@RequestBody List<OrderDish> rest) {
 		repo.saveAll(rest);

@@ -1,5 +1,6 @@
 package com.restser.controllers;
 
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//import com.restser.dto.OrdersActiveDTO;
 import com.restser.model.Account;
+//import com.restser.model.Orders;
 import com.restser.model.Reservation;
 import com.restser.model.User;
 import com.restser.repository.AccountRepository;
+//import com.restser.repository.OrderRepository;
+//import com.restser.repository.ReservationRepository;
 
 @RestController
 @RequestMapping("/account")
@@ -23,7 +28,11 @@ public class AccountController {
 
 	@Autowired
 	private AccountRepository repo;
-	
+	/*@Autowired
+	private OrderRepository oRepo;
+	@Autowired
+	private ReservationRepository Resrepo;*/
+		
 	@GetMapping
 	public List<Account> getList(){
 		return repo.findAll();

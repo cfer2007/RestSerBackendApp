@@ -1,7 +1,5 @@
 package com.restser.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "contact")
 @Table(name = "contact", uniqueConstraints= @UniqueConstraint(columnNames = {"uid", "id_friend"}))
@@ -30,8 +26,8 @@ public class Contact {
 	private User friend;
 	
 	@Column
-	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
-	private Date date;
+	//@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
+	private String date;
 
 	public Long getIdContact() {
 		return idContact;
@@ -57,11 +53,11 @@ public class Contact {
 		this.friend = friend;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}	
 }

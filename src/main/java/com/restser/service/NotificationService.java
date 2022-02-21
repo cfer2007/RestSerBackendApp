@@ -26,7 +26,7 @@ public class NotificationService {
 		//HttpEntity<String> request = req.createPostRequestSendNotification(fcmServerKey,fcmToken, title,message);
 		HttpEntity<String> request = req.createPostRequestSendNotification(notification,fcmServerKey);
     	ResponseEntity<String> responseEntity = (ResponseEntity<String>) response.doPostForEntity(ApiUrlConstants.FCM_SEND_MESSAGE, request, String.class);
-    	System.out.println(responseEntity);
+    	//System.out.println(responseEntity);
     	return responseEntity;
     }
 }

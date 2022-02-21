@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ReservationDetail {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idReservationDetail;
 	
 	@Column(length=10)

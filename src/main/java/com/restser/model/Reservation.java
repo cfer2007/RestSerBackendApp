@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Table(name="reservation")
@@ -22,15 +20,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Reservation {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idReservation;
 	
 	@Column(length=10)
 	private String status;
 	
 	@Column
-	@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
-	private Date start;
+	//@JsonFormat(pattern="yyyy-MM-dd' 'HH:mm:ss")
+	private String start;
 	
 	@Column
 	private Date finish;
@@ -44,9 +42,9 @@ public class Reservation {
     private Tables table;
 
 	@OneToMany(mappedBy="reservation", fetch = FetchType.EAGER)
-	@JsonManagedReference
+	@JsonManagedReference//(value="account")
     private List<Account> listAccount;
-
+	
 	public long getIdReservation() {
 		return idReservation;
 	}
@@ -79,11 +77,11 @@ public class Reservation {
 		this.table = table;
 	}
 
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
@@ -101,6 +99,5 @@ public class Reservation {
 
 	public void setListAccount(List<Account> listAccount) {
 		this.listAccount = listAccount;
-	}
-	
+	}	
 }
