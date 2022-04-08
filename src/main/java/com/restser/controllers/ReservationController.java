@@ -1,8 +1,10 @@
 package com.restser.controllers;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restser.dto.EmptyJsonResponse;
 import com.restser.dto.ReservationActiveDTO;
 import com.restser.dto.ReservationDTO;
 import com.restser.model.Account;
@@ -20,6 +23,7 @@ import com.restser.repository.AccountRepository;
 import com.restser.repository.OrderRepository;
 import com.restser.repository.ReservationRepository;
 import com.restser.transaction.ConfirmReservation;
+import com.restser.transaction.FinishReservation;
 
 @RestController
 @RequestMapping("/reservation")
@@ -33,16 +37,15 @@ public class ReservationController {
 	private OrderRepository oRepo;
 	@Autowired
 	private ConfirmReservation reservationControl;
+	@Autowired
+	private FinishReservation finishReservation;
 	
-	@GetMapping
-	public List<Reservation> getList(){
-		return repo.findAll();
-	}	
 	@GetMapping("/{id}")
 	public Reservation getReservation(@PathVariable("id") Long id){
 		return repo.findByIdReservation(id);		
-	}
-	@GetMapping("/active/{uid}")
+	}	
+	
+	@GetMapping("/reservation_active/{uid}")
 	public Reservation getActiveReservation(@PathVariable("uid") String uid){
 		return repo.getActiveReservation(uid);		
 	}
@@ -51,13 +54,12 @@ public class ReservationController {
 		return repo.getFinishReservationList(uid);
 	}
 	
-	/*@GetMapping("/listReservationActive/{uid}")
-	public List<ReservationActiveDTO> getReservationActiveList(@PathVariable("uid") String uid){		
-		List<ReservationActiveDTO> listOrdersActive = new ArrayList<ReservationActiveDTO>();		
-		List<Long> listReservation = repo.getReservationsActive(uid);		
-		for(Long id: listReservation) {
+	@GetMapping("/reservation_orders_active/{uid}")
+	public ResponseEntity<Object> getReservationActive(@PathVariable("uid") String uid){
+		try {
+			Reservation res = repo.getActiveReservation(uid);		
 			List<Account> list = new ArrayList<Account>();			
-			List<Account> listAccount = aRepo.getAccountListByIdReservation(id);			
+			List<Account> listAccount = aRepo.findAccountListByIdReservation(res.getIdReservation());			
 			for(Account a: listAccount) {
 				List<Orders> listOrder = oRepo.getOrdersActiveByAccount(a.getIdAccount());
 				if(listOrder.size()>0) {
@@ -65,47 +67,26 @@ public class ReservationController {
 					list.add(a);
 				}				
 			}
-			if(list.size()>0) {
-				ReservationActiveDTO temp = new ReservationActiveDTO();
-				temp.setAccountList(list);
-				temp.setIdReservation(id);
-				listOrdersActive.add(temp);
+			ReservationActiveDTO reservation = new ReservationActiveDTO();
+			if(list.size()>0) {	
+				reservation.setAccountList(list);
+				//reservation.setIdReservation(res.getIdReservation());
+				reservation.setReservation(res);
+				return new ResponseEntity<Object>(reservation, null, HttpStatus.SC_OK);
 			}
-		}		
-		return listOrdersActive;
-	}*/
-	@GetMapping("/reservation_active/{uid}")
-	public ReservationActiveDTO getReservationActive(@PathVariable("uid") String uid){
-		Reservation res = repo.getActiveReservation(uid);	
-		
-		ReservationActiveDTO resnull = new ReservationActiveDTO();
-		List<Account> la = new ArrayList<Account>();
-		resnull.setIdReservation(0L);
-		resnull.setAccountList(la);
-		
-		if(res == null) {
-			return resnull;
+			else {
+				return new ResponseEntity<Object>(new EmptyJsonResponse(), null, HttpStatus.SC_NOT_FOUND);
+			} 
 		}
-			
-		List<Account> list = new ArrayList<Account>();			
-		List<Account> listAccount = aRepo.getAccountListByIdReservation(res.getIdReservation());			
-		for(Account a: listAccount) {
-			List<Orders> listOrder = oRepo.getOrdersActiveByAccount(a.getIdAccount());
-			if(listOrder.size()>0) {
-				a.setListOrder(listOrder);
-				list.add(a);
-			}				
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Object>(new EmptyJsonResponse(), null, HttpStatus.SC_NOT_FOUND);
 		}
-		ReservationActiveDTO reservation = new ReservationActiveDTO();
-		if(list.size()>0) {	
-			reservation.setAccountList(list);
-			reservation.setIdReservation(res.getIdReservation());
-			return reservation;	
-		}
-		else return resnull;
-				
-		
-			
+	}
+	
+	@GetMapping("/branch/{idBranch}")
+	public List<Reservation> getCollectingAccountsReservationByIdBranch(@PathVariable("idBranch") Long idBranch){
+		return repo.getCollectingAccountsReservationByIdBranch(idBranch);		
 	}
 	
 	@PostMapping
@@ -117,12 +98,10 @@ public class ReservationController {
 	@PutMapping
 	public void confirmReservation(@RequestBody Reservation rest) {
 		reservationControl.confirmReservation(rest);
-	}	
-		
-	@DeleteMapping(value="/{id}")
-	public void deleteReservation(@PathVariable("id") Long id) {
-		repo.deleteById(id);
 	}
 	
-	
+	@PutMapping("/finish/{idReservation}")
+	public void finishReservation(@PathVariable("idReservation") Long idReservation) {
+		finishReservation.finish(idReservation);
+	}
 }

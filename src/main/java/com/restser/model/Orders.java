@@ -32,8 +32,8 @@ public class Orders implements Serializable{
 	@Column(length=100)
 	private String comment;
 	
-	@Column(length=10)
-	private String status;
+	/*@Column(length=10)
+	private String status;*/
 	
 	@Column(length=2)
 	private String currency;
@@ -47,10 +47,6 @@ public class Orders implements Serializable{
 	@Column
 	private Long idOrderReservation;
 	
-	/*@ManyToOne
-	@JsonBackReference
-	@JoinColumn(name="idOrderOeservation")
-	private OrderReservation orderReservation;	*/
 
 	@ManyToOne
 	@JsonBackReference
@@ -85,13 +81,13 @@ public class Orders implements Serializable{
 		this.comment = comment;
 	}
 
-	public String getStatus() {
+	/*public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
+	}*/
 
 	public String getCurrency() {
 		return currency;

@@ -41,10 +41,9 @@ public class User {
 	public User() {
 	}
 
-	public User(String username, String email, /*String password, */String fcmToken, String uid) {
+	public User(String username, String email, String fcmToken, String uid) {
 		this.username = username;
 		this.email = email;
-		//this.password = password;
 		this.fcmToken = fcmToken;
 		this.uid = uid;
 	}

@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Table(name="restaurant")
 @Entity(name="restaurant")
@@ -30,6 +34,11 @@ public class Restaurant {
 	
 	@Column
 	private String logo;
+	
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name="idSupplier")
+	private Supplier supplier;
 	
 	public long getIdRestaurant() {
 		return idRestaurant;

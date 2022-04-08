@@ -19,8 +19,10 @@ public interface AccountRepository extends JpaRepository<Account, Long>{
 	
 	List<Account> findByUser(User user);
 	
-	@Query(value="select distinct a.id_account, a.currency, a.subtotal, a.id_reservation, a.uid, a.date \r\n"
+	@Query(value="select a.* \r\n"
 			+ "from account a\r\n"
 			+ "where a.id_reservation = :idReservation", nativeQuery = true)
-	List<Account> getAccountListByIdReservation(@Param("idReservation")Long idReservation);
+	List<Account> findAccountListByIdReservation(@Param("idReservation")Long idReservation);
+	
+	
 }

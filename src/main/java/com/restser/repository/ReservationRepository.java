@@ -16,16 +16,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>{
 			+ "from reservation r,\r\n"
 			+ "account a\r\n"
 			+ "where r.id_reservation = a.id_reservation\r\n"
-			//+ "and subtotal > 0\r\n"
+			+ "and subtotal > 0\r\n"
 			+ "and r.status = 'finished'\r\n"
 			+ "and a.uid = :uid \r\n", nativeQuery = true)
 	List<ReservationDTO> getFinishReservationList(@Param("uid") String uid);
-	
-	/*@Query(value="select id_reservation, finish, \"start\", status, id_table, uid\r\n"
-			+ "from reservation\r\n"
-			+ "where uid = :uid \r\n"
-			+ "and status = 'started'", nativeQuery = true)
-	List<Reservation> getReservationsActive(@Param("uid") String uid);*/
 	
 	@Query(value="select id_reservation\r\n"
 			+ "from reservation\r\n"
@@ -38,4 +32,16 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>{
 			+ "where r.uid = :uid \r\n"
 			+ "and r.status = 'started'", nativeQuery = true)
 	Reservation getActiveReservation(@Param("uid") String uid);
+	
+	@Query(value="select distinct r.* \r\n"
+			+ "from account a,\r\n"
+			+ "reservation r,\r\n"
+			+ "tables t,\r\n"
+			+ "branch b\r\n"
+			+ "where a.id_reservation = r.id_reservation\r\n"
+			+ "and r.id_table = t.id_table\r\n"
+			+ "and t.id_branch = b.id_branch\r\n"
+			+ "and b.id_branch = :idBranch \r\n"
+			+ "and a.status = 'collecting'", nativeQuery = true)
+	List<Reservation> getCollectingAccountsReservationByIdBranch(@Param("idBranch") Long idBranch);
 }

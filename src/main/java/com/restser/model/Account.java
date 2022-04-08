@@ -41,6 +41,24 @@ public class Account{
 	@Column
 	private double subtotal;
 	
+	@Column
+	private int tip_percentage;
+	
+	@Column
+	private double tip;
+	
+	@Column
+	private int tax_percentage;
+	
+	@Column
+	private double tax;
+	
+	@Column
+	private double total;
+	
+	@Column(length=10)
+	private String status;
+	
 	@OneToMany(mappedBy="account", fetch = FetchType.EAGER)
 	@JsonManagedReference
     private List<Orders> listOrder;
@@ -105,5 +123,52 @@ public class Account{
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	
+
+	public double getTip() {
+		return tip;
+	}
+
+	public void setTip(double tip) {
+		this.tip = tip;
+	}
+
+	public double getTax() {
+		return tax;
+	}
+
+	public void setTax(double tax) {
+		this.tax = tax;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public int getTip_percentage() {
+		return tip_percentage;
+	}
+
+	public void setTip_percentage(int tip_percentage) {
+		this.tip_percentage = tip_percentage;
+	}
+
+	public int getTax_percentage() {
+		return tax_percentage;
+	}
+
+	public void setTax_percentage(int tax_percentage) {
+		this.tax_percentage = tax_percentage;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

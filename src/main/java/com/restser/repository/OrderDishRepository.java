@@ -28,5 +28,5 @@ public interface OrderDishRepository extends JpaRepository<OrderDish, Long>{
 			+ "and ores.id_order_reservation = o.id_order_reservation\r\n"
 			+ "and ores.id_order_reservation = :idOrderReservation\r\n"
 			+ "group by od.name, od.id_dish, od.currency",nativeQuery=true)
-	List<OrderDishDTO> getOrderDishListByIdReservation(@Param("idOrderReservation") Long idOrderReservation);
+	List<OrderDishDTO> getOrderDishListByIdOrderReservation(@Param("idOrderReservation") Long idOrderReservation);
 }

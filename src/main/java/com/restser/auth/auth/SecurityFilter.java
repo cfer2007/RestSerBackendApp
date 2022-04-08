@@ -1,5 +1,6 @@
 package com.restser.auth.auth;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
@@ -53,7 +54,8 @@ public class SecurityFilter extends OncePerRequestFilter {
         boolean strictServerSessionEnabled = securityProps.getFirebaseProps().isEnableStrictServerSession();
         Cookie sessionCookie = cookieUtils.getCookie("session");
         String token = securityService.getBearerToken(request);
-        System.out.println(token);
+        //System.out.println(token);
+        //System.out.println("From: "+request.getHeader("From"));
         //logger.info(token);
         try {
             if (sessionCookie != null) {
@@ -62,8 +64,8 @@ public class SecurityFilter extends OncePerRequestFilter {
                         securityProps.getFirebaseProps().isEnableCheckSessionRevoked());
                 type = Credentials.CredentialType.SESSION;
             } else if (!strictServerSessionEnabled) {
-                if (token != null && !token.equalsIgnoreCase("undefined")) {
-                    decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
+            	if (token != null && !token.equalsIgnoreCase("undefined")) {
+                    decodedToken = FirebaseAuth.getInstance(FirebaseApp.getInstance(request.getHeader("From"))).verifyIdToken(token);
                     type = Credentials.CredentialType.ID_TOKEN;
                 }
             }

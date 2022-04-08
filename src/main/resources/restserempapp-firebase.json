@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "restserempapp",
+  "private_key_id": "dcff2fa437a7aef1de184b1a513d2b396f488911",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0adTxmsqo/9t2\nFcn5gTTAC5D9BReTie0H4+hDXpl76+T9tcYSlkbkjPYHUIjUd4H1BNePOMHS4dBG\n3REuY4EVhp6A//5E31aJT9fMhZCzZWGrVNmXGENCyAsst7EAv2bbcN/fYMFdNeP1\nQwscqbw0fvotHGjPahnUAB805jBdJiZsg+hl21VbI3UossOxAeQ8b7vYS9yWi+R8\ndK3KLN1fEWmavZ0U9BEJ/ew4fbF8wzNMCNYle3S5d6w9aFN1VvJaJynmMhbmaklU\nDEYr/KgmvbcI8JCDzEPMQP4DuDM8b0eyfV4bCXaPlB0gms28H39zk+4V/N9pxnsE\ngJFTk593AgMBAAECggEANso5OFKZH2/sd1UwrIxXt8cLdjvYqB7oFFBbljIhjKfc\nOEy+5aAr0XcZtKj5lQTiO8YHrOBAxMl9VjgG4r6nUiE6+9RCpSnqfvL3h448nq64\nVa8EEcX1j09vTVpP7/kwxI3n/0/ECYm3PCHrOv41QQAa/B43ml4Pj/mlgIwzveW4\nh+Kvr22o9ul2OZTPXJ3rqSXdrXBfyix/PTSxb7m1YFBxeDsSSy1zts7/Nff0Hhny\n1fbRJnByuSutP32AMW4jDKTB2RUdZU+i1gZWf2Q35H6HZKFm0xBr/Mrgoxix9lCn\nI34dQ2naRWI3uTeDNSTeyzYdejHNM91E+4fKsmg5qQKBgQDddKprddT3v2sfLdGd\nTaSc/Tbl2sdSOBL/tRtatq1i4QCltFdyLjoSQuH27z6utEDUMtSZJ+YCcXhCybka\n90wSn/q7QvzU4afG3qy/ChuaUuZP0I2RaHbXcygXiPR/oVOP11buvD0fsRSYD3Xj\nGz0VNa15nsVWdU9pWKFMjUVPTQKBgQDQjjvW3rHeG+atYRv4aZlXkYWJWjDHGSCg\nboxDn4DNUCLg1OmC8Oq02rPMXw8B4dWeHMV6koXAkQ0HHeiQtBYBr88YrieHDvJH\nUlVzLGQuroWwn7MzUnIho/vZ/ZIT6AsK7qwG4ePeYlgYX864YSnGu/CbfHYRGD4A\nJ8dDt6TP0wKBgQCaHEEobSSakDwUw4b2x/yBP3l/taM15U3bYwY5N50rjVcs+XZN\nQDwrTx3/APkHDOt8gC8QsgJPuvUszUKisGvhHjGXNYPLBYoDTBy9CWSyHXSnIIQU\nJ7VkM4A3+JflZbhIBlw54QdMUaf6NfAc7mywoN0rIMFFbHep4QLGyhzslQKBgBlx\nMJWe5z38U2DVVu8wGrfXFd5StV6kjxljQxNA0xq46vhYoQALWeakQ4jsE82b+k5m\nniS82TpLt7YljOiSP5kHFJGjNUlBpobS4X/Ca5pSShbo9JiPN0MpWSEX0QlCpo43\n3Z6dUgogHzUiAvr1R35qEQk23sRpG68zKxj0v1NnAoGBANv3kEPexPng7xGwuy12\nYYTp5gEK9KikYZCHFXN293xHSGLkPWIrKVsZdWktxzJzmh//dnCLm8gD9hO0e+un\n54s4bT4w/+d2UHya198e/EZlq2i24rOSXbfUPpuv7LYdVp22nZeRQidexsbPvG68\nJ8zCFpSJHq8yYkmgCpR/95j9\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-gqj1d@restserempapp.iam.gserviceaccount.com",
+  "client_id": "104942391003820026188",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-gqj1d%40restserempapp.iam.gserviceaccount.com"
+}

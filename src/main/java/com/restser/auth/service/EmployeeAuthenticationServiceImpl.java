@@ -16,7 +16,7 @@ import com.restser.utility.CreateRequest;
 import com.restser.utility.CreateResponse;
 
 @Component
-public class UserAuthenticationServiceImpl implements AuthenticationService {
+public class EmployeeAuthenticationServiceImpl implements AuthenticationService {
 
     private String firebaseWebApiKey;
     
@@ -28,7 +28,7 @@ public class UserAuthenticationServiceImpl implements AuthenticationService {
     @Autowired
 	UserRepository userRepo;
 
-    public UserAuthenticationServiceImpl() {
+    public EmployeeAuthenticationServiceImpl() {
         stringUtility = new StringUtility();
         firebaseWebApiKey = properties.getValue("firebase.client.webkey");
     }

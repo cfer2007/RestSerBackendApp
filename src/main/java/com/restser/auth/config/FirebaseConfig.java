@@ -22,20 +22,23 @@ public class FirebaseConfig {
     @Primary
     @Bean
     public void firebaseInit() {
-        InputStream inputStream = null;
+        InputStream inputStream1 = null;
+        InputStream inputStream2 = null;
+        
         try {
-            inputStream = new ClassPathResource("firebase_config.json").getInputStream();
+            inputStream1 = new ClassPathResource("firebase_config.json").getInputStream();
+            inputStream2 = new ClassPathResource("restserempapp-firebase.json").getInputStream();
         } catch (IOException e3) {
             e3.printStackTrace();
         }
         try {
 
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(inputStream))
-                    .build();
+            FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(inputStream1)).build();
+            FirebaseOptions options2 = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(inputStream2)).build();
 
             if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
+                FirebaseApp.initializeApp(options,"restserapp");
+                FirebaseApp.initializeApp(options2,"restserempapp");
             }
             System.out.println("Firebase Initialize");
 

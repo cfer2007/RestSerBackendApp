@@ -1,7 +1,7 @@
 package com.restser.dto;
 
 public interface OrderDishDTO {
-	//Long getIdOrderReservation();
+	Long getIdOrderReservation();
 	String getCurrency();
 	Double getPrice();
 	int getUnits();

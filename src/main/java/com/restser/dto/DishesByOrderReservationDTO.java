@@ -5,16 +5,9 @@ import java.util.List;
 import com.restser.model.OrderReservation;
 
 public class DishesByOrderReservationDTO {
-	//Long idOrderReservation;
 	OrderReservation orderReservation;
 	List<OrderDishDTO> orderDishList;
-	
-	/*public Long getIdOrderReservation() {
-		return idOrderReservation;
-	}
-	public void setIdOrderReservation(Long idOrderReservation) {
-		this.idOrderReservation = idOrderReservation;
-	}*/
+		
 	public OrderReservation getOrderReservation() {
 		return orderReservation;
 	}
